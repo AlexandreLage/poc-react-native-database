@@ -9,8 +9,8 @@ trigger:
 pool:
   vmImage: 'macOS-10.14'
 
-variables:
-  - group: AndroidKeystore
+# variables:
+#   - group: AndroidKeystore
 
 steps:
 - task: NodeTool@0
@@ -31,15 +31,15 @@ steps:
     testResultsFiles: '**/TEST-*.xml'
     tasks: 'assembleRelease'
 
-- task: AndroidSigning@2
-  inputs:
-    apkFiles: '**/*.apk'
-    jarsign: true
-    jarsignerKeystoreFile: 'android.keystore'
-    jarsignerKeystorePassword: '$(jarsignerKeystorePassword)'
-    jarsignerKeystoreAlias: 'react-native-pipeline-key'
-    jarsignerKeyPassword: '$(jarsignerKeyPassword)'
-    zipalign: true
+# - task: AndroidSigning@2
+#   inputs:
+#     apkFiles: '**/*.apk'
+#     jarsign: true
+#     jarsignerKeystoreFile: 'android.keystore'
+#     jarsignerKeystorePassword: '$(jarsignerKeystorePassword)'
+#     jarsignerKeystoreAlias: 'react-native-pipeline-key'
+#     jarsignerKeyPassword: '$(jarsignerKeyPassword)'
+#     zipalign: true
 
 - script: mv android/app/build/outputs/apk/release/app-release-unsigned.apk ReactNativePipeline$(Build.BuildNumber).apk
   displayName: 'Rename apk'
