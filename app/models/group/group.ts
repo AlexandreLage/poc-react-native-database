@@ -1,6 +1,21 @@
 import { Instance, SnapshotOut, types } from "mobx-state-tree"
 import { integer } from "mobx-state-tree/dist/internal"
 
+interface GroupJson {
+        id: number
+        name: string
+        status: boolean
+        about: string
+        privacy: undefined
+        authorID: number
+        _key_admins: number[]
+        approved: boolean
+        avatar: string
+        cover: string
+        parentid: number
+        phone: string
+}
+
 /**
  * Model description here for TypeScript hints.
  */
@@ -21,7 +36,22 @@ export const GroupModel = types
         phone: types.optional(types.string, "")
         })
   .views((self) => ({})) // eslint-disable-line @typescript-eslint/no-unused-vars
-  .actions((self) => ({})) // eslint-disable-line @typescript-eslint/no-unused-vars
+  .actions((self) => ({
+        parseJson(json: GroupJson) {
+            self.id = json.id
+            self.name = json.name
+            self.status = json.status
+            self.about = json.about
+            self.privacy = json.privacy
+            self.authorID = json.authorID
+            self.admins = json._key_admins
+            self.approved = json.approved
+            self.avatar = json.avatar
+            self.cover = json.cover
+            self.parentid = json.parentid
+            self.phone = json.phone
+        }
+  })) // eslint-disable-line @typescript-eslint/no-unused-vars
 
 /**
  * Un-comment the following to omit model attributes from your snapshots (and from async storage).
@@ -32,7 +62,7 @@ export const GroupModel = types
  */
 
 type GroupType = Instance<typeof GroupModel>
-export interface Group extends GroupType {}
+export interface Group extends GroupType { }
 type GroupSnapshotType = SnapshotOut<typeof GroupModel>
-export interface GroupSnapshot extends GroupSnapshotType {}
+export interface GroupSnapshot extends GroupSnapshotType { }
 export const createGroupDefaultModel = () => types.optional(GroupModel, {})
