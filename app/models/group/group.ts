@@ -1,7 +1,7 @@
 import { Instance, SnapshotOut, types } from "mobx-state-tree"
 import { integer } from "mobx-state-tree/dist/internal"
 
-interface GroupJson {
+export interface GroupRemoteModel {
         id: number
         name: string
         status: boolean
@@ -37,7 +37,7 @@ export const GroupModel = types
         })
   .views((self) => ({})) // eslint-disable-line @typescript-eslint/no-unused-vars
   .actions((self) => ({
-        parseJson(json: GroupJson) {
+        parseJson(json: GroupRemoteModel) {
             self.id = json.id
             self.name = json.name
             self.status = json.status
