@@ -29,6 +29,12 @@ function generateGroupJSON() {
   })
 }
 
+function GroupListItem(item) {
+  return <View style={styles.listItem} >
+    <Text style={{ color: color.palette.black }}>{`${item.id} - ${item.about}`}</Text>
+  </View>
+}
+
 export const GroupsScreen = observer(function GroupsScreen() {
   // Pull in one of our MST stores
   const { groupStore } = useStores()
@@ -65,10 +71,8 @@ export const GroupsScreen = observer(function GroupsScreen() {
       <FlatList
         style={{ flex: 1 }}
         data={groupStore.groups.slice()} //@TODO: Find why observable is not working
-        renderItem={({ item }) =>
-          <View style={styles.listItem} >
-            <Text style={{ color: color.palette.black }}>{`${item.id} - ${item.about}`}</Text>
-          </View>}
+        ListEmptyComponent={() => <View style={{height: 200, justifyContent: 'center', alignItems: 'center'}}><Text style={{color: color.palette.black}}>Lista de grupos vazia.</Text></View>}
+        renderItem={({ item }) => GroupListItem(item)}
       />
       <TouchableOpacity style={styles.buttonOpen}
         onPress={() => showModal()}>
