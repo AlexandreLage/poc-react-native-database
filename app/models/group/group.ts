@@ -1,6 +1,4 @@
 import { Instance, SnapshotOut, types } from "mobx-state-tree"
-import { integer } from "mobx-state-tree/dist/internal"
-
 export interface GroupRemoteModel {
         id: number
         name: string
@@ -28,7 +26,7 @@ export const GroupModel = types
         about: types.optional(types.string, ""),
         privacy: types.optional(types.string, ""),
         authorID: types.integer,
-        admins: types.optional(types.array(integer), []),
+        admins: types.optional(types.array(types.integer), []),
         approved: types.optional(types.boolean, true),
         avatar: types.optional(types.string, ""),
         cover: types.optional(types.string, ""),
