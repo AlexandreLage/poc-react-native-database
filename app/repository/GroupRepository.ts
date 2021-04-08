@@ -19,7 +19,6 @@ export class GroupRepository implements IGroupRepository {
         //this._api.getGroups(page);
         //If there is no internet, fetch from local database
         const groups = this._localStorage.objects<GroupLocalStorageModel>("Group");
-        console.log('realm groups: ', groups.toJSON());
         return Promise.resolve(groups.toJSON());
     }
     save(group: GroupLocalStorageModel): Promise<boolean> {
@@ -31,5 +30,10 @@ export class GroupRepository implements IGroupRepository {
     }
     saveBatch(groups: GroupLocalStorageModel[]): Promise<boolean> {
         throw new Error("Method not implemented.");
+    }
+    deleteAll() {
+        this._localStorage.write(() => {
+            this._localStorage.deleteAll();
+        });
     }
 }
