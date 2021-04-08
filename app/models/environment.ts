@@ -1,3 +1,5 @@
+import { realmLocalStorage } from "../localstorage/realm"
+import { GroupRepository } from "../repository/GroupRepository"
 import { Api } from "../services/api"
 
 let ReactotronDev
@@ -18,6 +20,9 @@ export class Environment {
       this.reactotron = new ReactotronDev()
     }
     this.api = new Api()
+
+    //Init repositories
+    this.groupRepository = new GroupRepository(this.api, realmLocalStorage);
   }
 
   async setup() {
@@ -37,4 +42,9 @@ export class Environment {
    * Our api.
    */
   api: Api
+
+  /**
+   * Repositories
+   */
+  groupRepository: GroupRepository
 }
