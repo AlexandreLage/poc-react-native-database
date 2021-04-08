@@ -59,7 +59,7 @@ export const GroupsScreen = observer(function GroupsScreen() {
     setModalVisibility(true)
   }
 
-  function deleteAllGroups(){
+  function deleteAllGroups() {
     groupStore.deleteAll();
   }
 
@@ -152,7 +152,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: 20, right: 20,
     justifyContent: 'center', alignItems: 'center',
-    borderRadius: 5, 
+    borderRadius: 5,
     padding: 13
   },
   buttonOpen: {
