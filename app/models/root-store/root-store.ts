@@ -1,17 +1,15 @@
 import { Instance, SnapshotOut, types } from "mobx-state-tree"
 import { CharacterStoreModel } from "../character-store/character-store"
-import { GroupModel } from "../group/group"
+import { GroupStoreModel } from "../group-store/group-store"
 /**
  * A RootStore model.
  */
 // prettier-ignore
 export const RootStoreModel = types.model("RootStore").props({
   characterStore: types.optional(CharacterStoreModel, {} as any),
-  groupStore: types.optional(types.array(GroupModel), [])
+  groupStore: types.optional(GroupStoreModel, {} as any)
 })
 .actions(self => ({
-  addGroupsBatch(groups: typeof GroupModel[]){ self.groupStore.concat(groups) },
-  addGroup(group: typeof GroupModel){ self.groupStore.push(group) }
 }))
 
 /**
